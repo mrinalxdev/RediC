@@ -2,14 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include "storage.h"
+#include "utils.h"
 
 #define HASH_TABLE_SIZE 256
 
 KeyValue *hash_table[HASH_TABLE_SIZE];
-
-unsigned char hash(const char *key){
-    return (unsigned char)(key[0] % HASH_TABLE_SIZE);
-}
 
 void set_value(const char *key, const char *value){
 	unsigned char index = hash(key);
