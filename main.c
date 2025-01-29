@@ -117,16 +117,12 @@ int main() {
     printf("Redis Server listening on port %d\n", PORT);
 
     while (1) {
-        // Copy master set to read set
         read_fds = master_set;
 
-        // Wait for activity on sockets
         if (select(max_sd + 1, &read_fds, NULL, NULL, NULL) < 0) {
             perror("Select error");
             exit(EXIT_FAILURE);
         }
-
-        // Check for new connection
         if (FD_ISSET(server_socket, &read_fds)) {
             struct sockaddr_in client_addr;
             socklen_t client_len = sizeof(client_addr);
